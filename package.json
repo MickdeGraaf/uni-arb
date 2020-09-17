@@ -1,0 +1,8 @@
+{
+  "name": "uni-arb",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": "https://github.com/MickdeGraaf/uni-arb.git",
+  "author": "Mick de Graaf <mick@mickdegraaf.nl>",
+  "license": "MIT"
+}
