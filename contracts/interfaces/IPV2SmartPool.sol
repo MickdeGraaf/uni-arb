@@ -345,12 +345,6 @@ interface IPV2SmartPool is IERC20 {
   function getEndBlock() external view returns (uint256);
 
   /**
-    @notice Get new token being added
-    @return New token
-  */
-  function getNewToken() external view returns (P2Storage.NewToken memory);
-
-  /**
     @notice Get if joining and exiting is enabled
     @return Enabled or not
   */
