@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 import { BuidlerConfig, usePlugin, task, internalTask } from "@nomiclabs/buidler/config";
 import { constants, utils } from "ethers";
 import { BigNumber } from "ethers/utils";
@@ -18,8 +20,15 @@ usePlugin("@nomiclabs/buidler-waffle");
 const config: ExtendedBuidlerConfig = {
   defaultNetwork: "buidlerevm",
   networks: {
+    // buidlerevm: {
+
+    // },
     frame: {
       url: "http://localhost:1248"
+    },
+    mainnet: {
+      url: "https://mainnet.infura.io/v3/ffa6c1dc83e44e6c9971d4706311d5ab",
+      accounts: [process.env.PRIVATE_KEY]
     }
   },
   solc: {
@@ -30,6 +39,16 @@ const config: ExtendedBuidlerConfig = {
     }
   },
 }
+
+task("deploy-arb")
+  .addParam("factory")
+  .addParam("router")
+  .setAction(async(taskArgs, { ethers }) => {
+    const signers = await ethers.getSigners();
+    const arb = await new ArbFactory(signers[0]).deploy(taskArgs.factory, taskArgs.router);
+
+    console.log(`contract deployed ${arb.address}`);
+}); 
 
 task("arb")
     .addParam("pie")
